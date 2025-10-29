@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}Mindscape - Admin Settings{% endblock %}
+{% block content %}
+
+<div class="masthead-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="text-center mb-4">Admin Settings</h1>
+                
+                <!-- Admin Management Section -->
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0">Admin Management</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Add New Admin -->
+                            <div class="col-md-6 mb-4">
+                                <h5>Add New Admin</h5>
+                                <form method="POST" action="{{ url_for('admin_add') }}">
+                                    {{ add_form.hidden_tag() }}
+                                    <div class="mb-3">
+                                        {{ add_form.email.label(class="form-label") }}
+                                        {{ add_form.email(class="form-control") }}
+                                        {% for error in add_form.email.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {{ add_form.submit() }}
+                                </form>
+                            </div>
+                            
+                            <!-- Remove Admin -->
+                            <div class="col-md-6 mb-4">
+                                <h5>Remove Admin</h5>
+                                <form method="POST" action="{{ url_for('admin_remove') }}">
+                                    {{ remove_form.hidden_tag() }}
+                                    <div class="mb-3">
+                                        {{ remove_form.email.label(class="form-label") }}
+                                        {{ remove_form.email(class="form-control") }}
+                                        {% for error in remove_form.email.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {{ remove_form.submit() }}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reported Answers Section -->
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0">Most Reported Answers</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Answer ID</th>
+                                        <th>User ID</th>
+                                        <th>Reports</th>
+                                        <th>Answer Preview</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if reported_answers %}
+                                        {% for answer in reported_answers %}
+                                        <tr>
+                                            <td>{{ answer.id }}</td>
+                                            <td>{{ answer.user_id }}</td>
+                                            <td><span class="badge bg-danger">{{ answer.report_count }}</span></td>
+                                            <td>{{ answer.answer[:100] }}{% if answer.answer|length > 100 %}...{% endif %}</td>
+                                            <td>
+                                                <a href="{{ url_for('view_answer', answer_id='%08d'|format(answer.id)) }}" class="btn btn-sm btn-outline-dark" target="_blank">View</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">No reported answers</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Statistics Section -->
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0">Platform Statistics</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Today's Answers -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Today's Answers</h6>
+                                        <h2 class="card-title mb-0">{{ stats.today_answers }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Active Users (24h) -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Active Users (24h)</h6>
+                                        <h2 class="card-title mb-0">{{ stats.active_users_24h }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Total Users -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Total Users</h6>
+                                        <h2 class="card-title mb-0">{{ stats.total_users }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <!-- Public Posts -->
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Public Posts</h6>
+                                        <h2 class="card-title mb-0">{{ stats.public_posts }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Private Posts -->
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Private Posts</h6>
+                                        <h2 class="card-title mb-0">{{ stats.private_posts }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Total Answers -->
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-subtitle mb-2 text-muted">Total Answers</h6>
+                                        <h2 class="card-title mb-0">{{ stats.total_answers }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

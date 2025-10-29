@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Mindscape - {{ answer['question'][:50] }}...{% endblock %}
+{% block og_title %}{{ answer['question'] }} - Mindscape{% endblock %}
+{% block og_description %}{{ answer['answer'][:150] }}...{% endblock %}
+
+{% block content %}
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="text-center text-white">
+                    <!-- Badges -->
+                    <p>
+                        <span class="badge bg-secondary">{{ answer['category'].title().replace("_", " ") }}</span>
+                        <span class="badge bg-light text-dark">{{ answer['depth'].title().replace("_", " ") }}</span>
+                        <span class="badge bg-sage">by {{ answer['username'] }}</span>
+                    </p>
+                    
+                    <!-- Question - Smaller size -->
+                    <h3 class="mb-4" style="font-size: 1.5rem; font-weight: 400;">{{ answer["question"] }}</h3>
+                    
+                    <!-- Answer Content - Simple white italic text -->
+                    <div class="mt-4">
+                        <p class="mb-0 text-white answer-content">{{ answer["answer"] }}</p>
+                    </div>
+                    
+                    <!-- Metadata -->
+                    <p class="mt-3 text-white-50">
+                        <small>Posted on {{ answer['updated_at'] }}</small>
+                    </p>
+                    
+                    <!-- Actions -->
+                    <div class="mt-4">
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-light me-2">← Home</a>
+                        {% if logged_in and not is_own_answer %}
+                        <a href="{{ url_for('report_answer', answer_id=answer['id']) }}" class="btn btn-outline-light">
+                            <i class="bi bi-flag me-1"></i>Report
+                        </a>
+                        {% elif logged_in and is_own_answer %}
+                        <button class="btn btn-outline-light disabled" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <i class="bi bi-flag me-1"></i>Report
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

@@ -1,13 +1,104 @@
 {% extends "base.html" %}
-{% from 'bootstrap5/form.html' import render_form %}
-{% block title %}Who Are You - My Page{% endblock %}
+{% block title %}Mindscape - My Page{% endblock %}
+{% block og_title %}My Page - Mindscape{% endblock %}
+{% block og_description %}Access your personal dashboard to manage your self-reflection journey and account settings.{% endblock %}
+
 {% block content %}
-        <div class="container my-4">
-            <h1 class="heading">My Page</h1>
-            <p>What do you want to do?</p>
-            <a class="btn btn-outline-secondary" href="{{ url_for('download') }}">Download Data</a><br><br>
-            <a class="btn btn-outline-secondary" href="{{ url_for('settings') }}">Update Account Information</a><br><br>
-            <a class="btn btn-outline-secondary" href="{{ url_for('change_password') }}">Change the Password</a><br><br>
-            <a class="btn btn-outline-secondary" href="{{ url_for('home') }}">Back to Home</a>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h1 class="h3 mb-0 text-dark">My Page</h1>
+                </div>
+                <div class="card-body">
+                    <!-- User Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="row g-3">
+                                <div class="col-md-3 col-6">
+                                    <div class="text-center">
+                                        <small class="text-muted d-block mb-2">Total Answers</small>
+                                        <div class="h4 mb-1">{{ user_stats.total_answers or 0 }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="text-center">
+                                        <small class="text-muted d-block mb-2">Answered Today</small>
+                                        <div class="h4 mb-1">
+                                            {% if user_stats.answered_today %}
+                                                <i class="bi bi-check-circle-fill text-success"></i>
+                                            {% else %}
+                                                <i class="bi bi-x-circle text-muted"></i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="text-center">
+                                        <small class="text-muted d-block mb-2">Top Category</small>
+                                        <div class="h6 mb-1">{{ user_stats.most_common_category.title().replace("_", " ") if user_stats.most_common_category else "None" }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="text-center">
+                                        <small class="text-muted d-block mb-2">Top Depth</small>
+                                        <div class="h6 mb-1">{{ user_stats.most_common_depth.title() if user_stats.most_common_depth else "None" }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Options -->
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="d-grid">
+                                <a class="btn btn-outline-secondary btn-lg py-3 text-dark mypage-menu-btn" href="{{ url_for('personal_information') }}">
+                                    Personal Information
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-grid">
+                                <a class="btn btn-outline-secondary btn-lg py-3 text-dark mypage-menu-btn" href="{{ url_for('change_password') }}">
+                                    Change Password
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-grid">
+                                <a class="btn btn-outline-secondary btn-lg py-3 text-dark mypage-menu-btn" href="{{ url_for('download') }}">
+                                    Download My Data
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Information and Help -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Account Information</h6>
+                            <p class="text-muted mb-0 small">Member since: {{ current_user.created_at[:10] if current_user.created_at else 'Unknown' }}</p>
+                            <p class="text-muted mb-0 small">Email: {{ current_user.email }}</p>
+                            <p class="text-muted mb-0 small" style="color: #adb5bd !important;">
+                                <a href="{{ url_for('delete_account') }}" class="text-decoration-none" style="color: #adb5bd !important;">Delete Account</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <h6>Need Help?</h6>
+                            <a href="{{ url_for('help') }}" class="text-decoration-none text-dark small">FAQ</a>
+                            <span class="mx-1">|</span>
+                            <a href="{{ url_for('contact') }}" class="text-decoration-none text-dark small">Contact Us</a>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Home</a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 {% endblock %}

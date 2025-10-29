@@ -1,9 +1,91 @@
 {% extends "base.html" %}
 {% from 'bootstrap5/form.html' import render_form %}
-{% block title %}Who Are You - Contact{% endblock %}
+{% block title %}Mindscape - Contact{% endblock %}
+{% block og_title %}Contact Us - Mindscape{% endblock %}
+{% block og_description %}Get in touch with us for support, questions, or feedback about your self-reflection journey.{% endblock %}
 {% block content %}
-        <div class="container my-4">
-            <h1 class="heading">Contact Form</h1>
-            {{ render_form(form) }}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h1 class="h3 mb-0 text-dark">Contact Us</h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
+                            
+                            <form method="POST" novalidate>
+                                {{ form.hidden_tag() }}
+                                
+                                <div class="mb-3">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control") }}
+                                    {% for error in form.name.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                    {% for error in form.email.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.category.label(class="form-label") }}
+                                    {{ form.category(class="form-select") }}
+                                    {% for error in form.category.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.message.label(class="form-label") }}
+                                    {{ form.message(class="form-control", rows="8", style="min-height: 200px;", maxlength="2000", **{"data-char-limit": "2000"}) }}
+                                    {% for error in form.message.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                    {% if form.message.data == "" and request.method == "POST" %}
+                                        <div class="text-danger small mt-1">Required</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3 d-flex gap-2">
+                                    {{ form.submit(class="btn btn-dark") }}
+                                    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-light p-3 rounded">
+                                <h5>Quick Help</h5>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ url_for('help') }}" class="text-decoration-none text-dark">Check our FAQ</a></li>
+                                    <li><a href="{{ url_for('about') }}" class="text-decoration-none text-dark">Learn about us</a></li>
+                                    <li><a href="{{ url_for('terms_of_use') }}" class="text-decoration-none text-dark">Terms of Use</a></li>
+                                </ul>
+                                
+                                <h6 class="mt-3">Response Time</h6>
+                                <p class="small text-muted">We typically respond within 24-48 hours during business days.</p>
+                                
+                                <h6>Categories</h6>
+                                <ul class="small text-muted list-unstyled">
+                                    <li>• General Inquiries</li>
+                                    <li>• Technical Issues</li>
+                                    <li>• Feature Requests</li>
+                                    <li>• Account Deletion</li>
+                                    <li>• Others</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 {% endblock %}

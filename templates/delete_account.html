@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Mindscape - Delete Account{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h1 class="h3 mb-0">Delete Account</h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-danger">
+                        <h5 class="alert-heading">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Warning
+                        </h5>
+                        <p class="mb-0">Deleting your account will immediately remove your access to all your answers. Your personal information will be permanently deleted, but your answers will be anonymized and preserved for research purposes.</p>
+                    </div>
+                    
+                    <div class="alert alert-light">
+                        <h6>What will be deleted:</h6>
+                        <ul class="mb-2">
+                            <li>Your username and email address</li>
+                            <li>Your profile information and image</li>
+                            <li>Your login credentials</li>
+                            <li><strong>Immediate access to your account and answers</strong></li>
+                        </ul>
+                        <h6>What will be preserved:</h6>
+                        <ul class="mb-0">
+                            <li>Your answers will be detached from your account and anonymized for research purposes</li>
+                            <li>Question and answer statistics</li>
+                        </ul>
+                    </div>
+                    
+                    <form method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="d-flex gap-2">
+                            {{ form.submit(class="btn btn-danger") }}
+                            <a href="{{ url_for('mypage') }}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

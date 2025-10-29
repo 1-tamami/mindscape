@@ -1,20 +1,40 @@
 {% extends "base.html" %}
-{% block title %}Who Are You - Edit{% endblock %}
+{% block title %}Mindscape - About{% endblock %}
+{% block og_title %}About Mindscape - Self-reflection Service{% endblock %}
+{% block og_description %}Learn about our mission to help you understand yourself through daily questions and personal reflection.{% endblock %}
 {% block content %}
-<!-- Masthead-->
-<header class="masthead">
+<header class="masthead-white">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <div class="col-xl-6">
-                <div class="text-left text-white">
+            <div class="col-xl-8">
+                <div class="text-left text-dark">
                     <h1>About Us</h1>
-                    <p>Have you ever been asked for your opinion and felt stuck?
-                        You do have an opinion, but you've never really thought about it before.<br>
-                    <p>But that's okay now. By answering one question a day, you'll know a little more about yourself.</p>
-                    <ul>
-                        <li>This is not meant for debating with others — it's just designed to help you understand your own opinions. </li>
-                        <li>These questions were gathered using an LLM, no psychology, just random questions.</li>                        
-                    </ul>
+                    <div class="lead">
+                        <ul>
+                            <li>This is not meant for debating with others — it's just designed to help you understand your own opinions.</li>
+                            <li>Create a personal journal of your thoughts and growth over time.</li>
+                            <li>Share your insights with the community or keep them private — your choice.</li>
+                        </ul>
+                        
+                        <h3>How It Works</h3>
+                        <ol>
+                            <li>Sign up for a free account</li>
+                            <li>Answer daily questions at your own pace</li>
+                            <li>Choose to share publicly or keep answers private</li>
+                            <li>Reflect on your previous answers and growth</li>
+                            <li>Explore insights shared by the community</li>
+                            <li>Download your data anytime</li>
+                        </ol>
+                        
+                        <div class="mt-4">
+                            {% if not logged_in %}
+                            <a href="{{ url_for('register') }}" class="btn btn-dark btn-lg me-2">Get Started</a>
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-dark btn-lg">Login</a>
+                            {% else %}
+                            <a href="{{ url_for('home') }}" class="btn btn-dark btn-lg">Start Answering</a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>    
             </div>
         </div>

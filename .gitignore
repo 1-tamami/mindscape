@@ -1,10 +1,11 @@
 .env
 __pycache__/
-raw_data.txt
+.pytest_cache/
+*.pyc
+*.pyo
+.venv/
+venv/
 questions.db
+*.sqlite
+*.sqlite3
 instance/
-replace_db.py
-old_questions.json
-questions.json
-gemini.py
-word_list.py

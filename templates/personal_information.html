@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Mindscape - Personal Information{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h1 class="h3 mb-0 text-dark">
+                        <i class="bi bi-person-gear me-2"></i>
+                        Personal Information
+                    </h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-light border">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Please input only the fields you want to update.
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="POST" novalidate>
+                                {{ form.hidden_tag() }}
+                                
+                                <div class="mb-3">
+                                    {{ form.username.label(class="form-label") }}
+                                    {{ form.username(class="form-control") }}
+                                    {% for error in form.username.errors %}
+                                        <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                    {% for error in form.email.errors %}
+                                        <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.student.label(class="form-label") }}
+                                    {{ form.student(class="form-select") }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.birthday.label(class="form-label") }}
+                                    {{ form.birthday(class="form-control") }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.pronouns.label(class="form-label") }}
+                                    {{ form.pronouns(class="form-select") }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form.location.label(class="form-label") }}
+                                    {{ form.location(class="form-select") }}
+                                </div>
+                                
+
+                                
+                                <div class="d-flex gap-2">
+                                    {{ form.submit(class="btn btn-dark") }}
+                                    <a href="{{ url_for('mypage') }}" class="btn btn-outline-secondary">Back</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,25 +1,44 @@
 {% extends "base.html" %}
-{% block title %}Who Are You - Edit{% endblock %}
+{% block title %}Mindscape - Edit{% endblock %}
 {% block content %}
-<!-- Masthead-->
 <header class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="text-center text-white">
-                    <!-- Page heading-->
                     <p>
-                        <span class="badge text-bg-secondary ">{{ question['category'].title().replace("_", " ") }}</span>
-                        <span class="badge text-bg-light">{{ question['depth'].title().replace("_", " ") }}</span>
+                        <span class="badge bg-secondary">{{ question['category'].title().replace("_", " ") }}</span>
+                        <span class="badge bg-light text-dark">{{ question['depth'].title().replace("_", " ") }}</span>
+                        {% if question.get('is_public') == 1 %}
+                            <span class="badge bg-success">Public</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Private</span>
+                        {% endif %}
                     </p>
                     <h1>{{ question["question"] }}</h1>
-                    <!-- New post input-->
+                    
                     <div class="position-relative">
-                        <form class=form_and_submit method="POST" action="{{ url_for('edit', id=question['question_id']) }}"> 
-                            <textarea class="form-control my-4" rows="5" aria-label="With textarea" placeholder="Tell me about yourself" name="new_record" id="new_record">{{ question["answer"] }}</textarea>      
-                            <button type="submit" class="btn btn-link position-absolute" style="right: 0; bottom: 0;"><img height=25 src="..//static/assets/img/send.svg"></button>
+                        <form class="form_and_submit" method="POST" action="{{ url_for('edit_answer', question_id=question['question_id']) }}"> 
+                            <div class="textarea-container position-relative">
+                                <textarea class="form-control my-4" rows="5" aria-label="Answer textarea" placeholder="Tell me about yourself" name="new_record" id="new_record" maxlength="2000" data-char-limit="2000">{{ question["answer"] }}</textarea>
+                                <div class="textarea-buttons-external">
+                                    <!-- Cancel Button -->
+                                    <button type="button" class="btn-icon-round tooltip-trigger" onclick="location.href='{{ url_for('home') }}'" title="Cancel" data-tooltip="Cancel">
+                                        <img height="20" src="{{ url_for('static', filename='assets/img/refresh.svg') }}" alt="Cancel" style="transform: scaleX(-1);">
+                                    </button>
+                                    <!-- Public/Private Toggle -->
+                                    <button type="button" class="btn-icon-round tooltip-trigger" id="publicToggle" onclick="togglePublic()" title="{% if question.get('is_public') == 1 %}Public{% else %}Private{% endif %}" data-tooltip="{% if question.get('is_public') == 1 %}Public{% else %}Private{% endif %}">
+                                        <img height="20" src="{{ url_for('static', filename='assets/img/public.svg') }}" alt="Public" id="publicIcon">
+                                    </button>
+                                    <input type="hidden" name="is_public" id="isPublicInput" value="{{ question.get('is_public', 1) }}">
+                                    <!-- Save Button -->
+                                    <button type="submit" class="btn-icon-round tooltip-trigger" title="Save" data-tooltip="Save">
+                                        <img height="20" src="{{ url_for('static', filename='assets/img/send.svg') }}" alt="Save">
+                                    </button>
+                                </div>
+                            </div>
                         </form> 
-                    </div>                        
+                    </div>                       
                 </div>    
             </div>
         </div>
