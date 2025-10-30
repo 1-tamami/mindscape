@@ -1,5 +1,5 @@
 /*!
-* Mindscape - Template Initialization Module
+* memochou - Template Initialization Module
 * Handles data passed from Flask templates to JavaScript
 * Copyright 2025 Tamami.K
 */
@@ -87,7 +87,7 @@
     // PUBLIC API
     // =============================================================================
 
-    window.MindscapeInit = {
+    window.memochouInit = {
         // Called when the main scripts.js is loaded
         onScriptsReady: function() {
             InitQueue.process();

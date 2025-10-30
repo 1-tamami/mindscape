@@ -9,7 +9,7 @@ class Config:
     """Application configuration"""
     # Core settings
     SECRET_KEY = os.getenv("FLASK_KEY", "dev-secret-key-change-in-production")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DB_URI", "sqlite:///mindscape.db")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DB_URI", "sqlite:///memochou.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Question categories and levels

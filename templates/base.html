@@ -3,19 +3,19 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Mindscape - Daily self-reflection through thoughtful questions. Discover yourself one answer at a time." />
+        <meta name="description" content="memochou - Daily self-reflection through thoughtful questions. Discover yourself one answer at a time." />
         <meta name="author" content="Tamami" />
-        <meta name="keywords" content="self-reflection, personal growth, daily questions, journaling, self-discovery, mindfulness, mindscape" />
+        <meta name="keywords" content="self-reflection, personal growth, daily questions, journaling, self-discovery, mindfulness, memochou" />
         
         <!-- Open Graph Meta Tags -->
-        <meta property="og:title" content="{% block og_title %}Mindscape - Self-reflection through daily questions{% endblock %}" />
+        <meta property="og:title" content="{% block og_title %}memochou - Self-reflection through daily questions{% endblock %}" />
         <meta property="og:description" content="{% block og_description %}Discover yourself through daily questions. Create a personal journal of your thoughts and growth over time.{% endblock %}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ request.url }}" />
         
         <!-- Twitter Card Meta Tags -->
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="{% block twitter_title %}Mindscape - Self-reflection{% endblock %}" />
+        <meta name="twitter:title" content="{% block twitter_title %}memochou - Self-reflection{% endblock %}" />
         <meta name="twitter:description" content="{% block twitter_description %}Daily questions for self-discovery and personal growth{% endblock %}" />
         
         <title>{% block title %}{% endblock %}</title>
@@ -35,13 +35,15 @@
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Mindscape",
+            "name": "memochou",
             "description": "Self-reflection through daily questions",
             "url": "{{ request.url_root }}"
         }
         </script>
     </head>
-    <body>
+    {% set flash_messages = get_flashed_messages() %}
+    {% set using_temp_password = (logged_in and current_user.is_using_temp_password) if logged_in is defined else False %}
+    <body data-flash-messages='{{ flash_messages | tojson | safe }}' data-using-temp-password="{{ 'true' if using_temp_password else 'false' }}">
         <!-- Toast Container -->
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div id="toastMessage" class="toast align-items-center position-relative" role="alert" aria-live="assertive" aria-atomic="true">
@@ -54,8 +56,7 @@
         <nav class="navbar navbar-light bg-white border-bottom fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url_for('home') }}">
-                    <img height="25" src="{{ url_for('static', filename='assets/img/person-arms-up.svg') }}" alt="Mindscape Logo"> 
-                    Mindscape
+                    <span class="brand-name">memochou</span>
                 </a>
                 <div class="d-flex align-items-center">
                     {% if not logged_in %}
@@ -100,7 +101,7 @@
                             <a class="link-dark" href="{{ url_for('terms_of_use') }}">Terms of Use</a>
                         </p>
                         <p class="small mb-4 mb-lg-0 text-dark">
-                            &copy; Mindscape {{ current_year }}. All Rights Reserved.
+                            &copy; <span class="brand-name">memochou</span> {{ current_year }}. All Rights Reserved.
                         </p>
                     </div>
                 </div>
@@ -111,23 +112,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{{ url_for('static', filename='js/init.js') }}"></script>
         <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-        
-        <!-- Flask Data Integration -->
-        <script>
-            (function() {
-                // Flash Messages
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        MindscapeInit.showFlashMessages({{ messages | tojson }});
-                    {% endif %}
-                {% endwith %}
-                
-                // Temp Password Warning
-                {% if logged_in and current_user.is_using_temp_password %}
-                    MindscapeInit.setTempPasswordFlag(true);
-                    MindscapeInit.showTempPasswordWarning();
-                {% endif %}
-            })();
-        </script>
+        <script src="{{ url_for('static', filename='js/page-hooks.js') }}"></script>
     </body>
 </html>

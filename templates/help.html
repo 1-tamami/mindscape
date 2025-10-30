@@ -1,170 +1,61 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - Help{% endblock %}
-{% block og_title %}Help & FAQ - Mindscape{% endblock %}
+{% block title %}memochou - Help{% endblock %}
+{% block og_title %}Help & FAQ - memochou{% endblock %}
 {% block og_description %}Find answers to common questions about using our self-reflection platform and daily question service.{% endblock %}
 {% block content %}
-<header class="masthead">
-    <div class="container position-relative">
+<section class="simple-page">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-8">
-                <div class="text-left text-white">
-                    <h1 class="mb-5 text-white">Frequently Asked Questions</h1>
-                    
-                    <!-- General Questions -->
-                    <h3 class="text-white mb-4">General Questions</h3>
-                    <div class="faq-container mb-5">
-                        <!-- FAQ Item 1 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(1)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        How do I answer questions?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-1"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-1" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-1" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Simply type your thoughts in the text area below each question and click the Send button. You can choose to make your answer public or keep it private using the privacy toggle.</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-lg-8 col-xl-7">
+                <h1 class="simple-page__title">Frequently Asked Questions</h1>
+                <div class="simple-page__content">
+                    <p>Quick answers to the questions we hear most often. If you need something more specific, please <a href="{{ url_for('contact') }}">drop us a message</a>.</p>
 
-                        <!-- FAQ Item 2 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(2)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        How can I skip a question?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-2"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-2" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-2" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Click the refresh/skip button next to the answer box, or click the "Mindscape" logo in the navigation bar to get a new random question.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="simple-page__section">
+                        <h2 class="simple-page__subheading">Getting started</h2>
+                        <dl class="simple-page__faq">
+                            <dt>How do I answer questions?</dt>
+                            <dd>Type your thoughts in the answer field and select <em>Send</em>. Use the privacy toggle to decide whether the post stays private or is shared publicly.</dd>
 
-                        <!-- FAQ Item 3 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(3)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        What's the difference between public and private answers?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-3"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-3" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-3" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Public answers are visible to all users in the "All Users" tab and can be viewed by clicking on them. Private answers are only visible to you in your "Your Logs" tab.</p>
-                                </div>
-                            </div>
-                        </div>
+                            <dt>How can I skip a question?</dt>
+                            <dd>Click the refresh icon next to the answer area. You can also click the memochou wordmark in the top-left corner to load a new random question.</dd>
 
-                        <!-- FAQ Item 4 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(4)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        Can I edit or delete my answers?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-4"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-4" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-4" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Yes! In your "Your Logs" tab, you can edit any answer by clicking the pencil icon, or delete it by clicking the trash icon. You can also change the privacy setting when editing.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FAQ Item 5 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(5)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        How can I filter and sort my answers?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-5"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-5" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-5" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Use the dropdown menus above your answer list to filter by category (like Personal Growth, Relationships), depth (Surface, Deep), or sort by date (Latest or Oldest first).</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FAQ Item 6 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(6)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        I forgot my password. How can I reset it?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-6"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-6" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-6" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Click "Forgot your password?" on the login page, enter your email address, and we'll send you a temporary password. After logging in, you'll be prompted to change it to a permanent password.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FAQ Item 7 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(7)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        How can I report inappropriate content?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-7"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-7" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-7" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">In the "All Users" tab, click the three dots (⋯) next to any answer and select "Report". Choose a reason and provide additional details if needed. We review all reports promptly.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FAQ Item 8 -->
-                        <div class="faq-item mb-4">
-                            <div class="faq-card" style="background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden;">
-                                <div class="faq-question py-3 px-4 cursor-pointer" onclick="toggleFaq(8)">
-                                    <h5 class="mb-0 text-white d-flex justify-content-between align-items-center">
-                                        Is my data private and secure?
-                                        <i class="bi bi-chevron-down faq-chevron text-white" id="icon-8"></i>
-                                    </h5>
-                                </div>
-                                <div class="faq-divider" id="divider-8" style="display: none;">
-                                    <hr style="margin: 0; border-color: rgba(255, 255, 255, 0.3); opacity: 0.5;">
-                                </div>
-                                <div class="faq-answer p-4" id="answer-8" style="display: none;">
-                                    <p class="text-white mb-0" style="line-height: 1.6;">Yes! Private answers are only visible to you. Public answers show your username but no other personal information. We don't share your data with third parties. See our <a href="{{ url_for('terms_of_use') }}" class="link-light text-decoration-underline">Terms of Use</a> for details.</p>
-                                </div>
-                            </div>
-                        </div>
+                            <dt>What's the difference between public and private answers?</dt>
+                            <dd>Public answers appear in the “All Users” feed with your username. Private answers are visible only to you in “Your Logs”. You can change the privacy setting later when editing an entry.</dd>
+                        </dl>
                     </div>
 
-                    <div class="mt-5 text-center">
-                        <p class="lead text-white">Still have questions?</p>
-                        <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    <div class="simple-page__section">
+                        <h2 class="simple-page__subheading">Managing entries</h2>
+                        <dl class="simple-page__faq">
+                            <dt>Can I edit or delete previous reflections?</dt>
+                            <dd>Yes. Open “Your Logs”, select an entry, and choose the edit or delete option. Edits let you revise the text and adjust the public/private setting.</dd>
+
+                            <dt>How do filters work on the My Page view?</dt>
+                            <dd>Use the category, depth, and time filters to narrow the list of answers you see. It’s a quick way to review specific themes or track how you felt during a particular period.</dd>
+
+                            <dt>Can I download my data?</dt>
+                            <dd>Yes. Visit your account settings and choose the export option to download a CSV file of your entries.</dd>
+                        </dl>
                     </div>
-                </div>    
+
+                    <div class="simple-page__section">
+                        <h2 class="simple-page__subheading">Community &amp; safety</h2>
+                        <dl class="simple-page__faq">
+                            <dt>How can I report inappropriate content?</dt>
+                            <dd>In the “All Users” tab, open the menu (⋯) for any public post and select <em>Report</em>. Choose a reason and add context if needed—we review every report.</dd>
+
+                            <dt>Is my data private and secure?</dt>
+                            <dd>Private responses stay visible only to you. Public posts show your username but no personal details. We never sell or share your data. Review the <a href="{{ url_for('terms_of_use') }}">Terms of Use</a> for more information.</dd>
+                        </dl>
+                    </div>
+
+                    <div class="simple-page__section">
+                        <p>Still puzzled by something? <a href="{{ url_for('contact') }}">Send us a note</a> and we’ll help as soon as we can.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</header>
+</section>
 {% endblock %}

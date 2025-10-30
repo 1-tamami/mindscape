@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - Edit{% endblock %}
+{% block title %}memochou - Edit{% endblock %}
 {% block content %}
 <header class="masthead">
     <div class="container position-relative">
@@ -24,7 +24,7 @@
                                 <div class="textarea-buttons-external">
                                     <!-- Cancel Button -->
                                     <button type="button" class="btn-icon-round tooltip-trigger" onclick="location.href='{{ url_for('home') }}'" title="Cancel" data-tooltip="Cancel">
-                                        <img height="20" src="{{ url_for('static', filename='assets/img/refresh.svg') }}" alt="Cancel" style="transform: scaleX(-1);">
+                                        <img height="20" src="{{ url_for('static', filename='assets/img/refresh.svg') }}" alt="Cancel" class="icon-flip-horizontal">
                                     </button>
                                     <!-- Public/Private Toggle -->
                                     <button type="button" class="btn-icon-round tooltip-trigger" id="publicToggle" onclick="togglePublic()" title="{% if question.get('is_public') == 1 %}Public{% else %}Private{% endif %}" data-tooltip="{% if question.get('is_public') == 1 %}Public{% else %}Private{% endif %}">

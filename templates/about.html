@@ -1,43 +1,42 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - About{% endblock %}
-{% block og_title %}About Mindscape - Self-reflection Service{% endblock %}
+{% block title %}memochou - About{% endblock %}
+{% block og_title %}About memochou - Self-reflection Service{% endblock %}
 {% block og_description %}Learn about our mission to help you understand yourself through daily questions and personal reflection.{% endblock %}
 {% block content %}
-<header class="masthead-white">
-    <div class="container position-relative">
+<section class="simple-page simple-page--about">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-8">
-                <div class="text-left text-dark">
-                    <h1>About Us</h1>
-                    <div class="lead">
+            <div class="col-lg-8 col-xl-7">
+                <h1 class="simple-page__title">About memochou</h1>
+                <div class="simple-page__content">
+                    <p><strong>memochou</strong> is a quiet space for daily self-reflection. We designed it for people who want to explore their own thoughts without the noise of debates or social feeds.</p>
+
+                    <div class="simple-page__section">
+                        <h2 class="simple-page__subheading">What you can do here</h2>
                         <ul>
-                            <li>This is not meant for debating with others — it's just designed to help you understand your own opinions.</li>
-                            <li>Create a personal journal of your thoughts and growth over time.</li>
-                            <li>Share your insights with the community or keep them private — your choice.</li>
+                            <li>Capture personal reflections through thoughtful daily questions.</li>
+                            <li>Keep your answers private or share them publicly—it's always your choice.</li>
+                            <li>Review your past entries to notice patterns and growth over time.</li>
+                            <li>Download your data whenever you want a copy of your writing.</li>
                         </ul>
-                        
-                        <h3>How It Works</h3>
-                        <ol>
-                            <li>Sign up for a free account</li>
-                            <li>Answer daily questions at your own pace</li>
-                            <li>Choose to share publicly or keep answers private</li>
-                            <li>Reflect on your previous answers and growth</li>
-                            <li>Explore insights shared by the community</li>
-                            <li>Download your data anytime</li>
-                        </ol>
-                        
-                        <div class="mt-4">
-                            {% if not logged_in %}
-                            <a href="{{ url_for('register') }}" class="btn btn-dark btn-lg me-2">Get Started</a>
-                            <a href="{{ url_for('login') }}" class="btn btn-outline-dark btn-lg">Login</a>
-                            {% else %}
-                            <a href="{{ url_for('home') }}" class="btn btn-dark btn-lg">Start Answering</a>
-                            {% endif %}
-                        </div>
                     </div>
-                </div>    
+
+                    <div class="simple-page__section">
+                        <h2 class="simple-page__subheading">How it works</h2>
+                        <ol>
+                            <li>Create a free account.</li>
+                            <li>Answer the daily question or skip until something resonates.</li>
+                            <li>Choose whether to keep your response private or share it.</li>
+                            <li>Return anytime to continue your personal record.</li>
+                        </ol>
+                    </div>
+
+                    <div class="simple-page__section">
+                        <p>If you'd like to begin, <a href="{{ url_for('register') }}">create an account</a> or <a href="{{ url_for('login') }}">sign in</a> to pick up where you left off.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</header>
+</section>
 {% endblock %}

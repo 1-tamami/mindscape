@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - {{ answer['question'][:50] }}...{% endblock %}
-{% block og_title %}{{ answer['question'] }} - Mindscape{% endblock %}
+{% block title %}memochou - {{ answer['question'][:50] }}...{% endblock %}
+{% block og_title %}{{ answer['question'] }} - memochou{% endblock %}
 {% block og_description %}{{ answer['answer'][:150] }}...{% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
                     </p>
                     
                     <!-- Question - Smaller size -->
-                    <h3 class="mb-4" style="font-size: 1.5rem; font-weight: 400;">{{ answer["question"] }}</h3>
+                    <h3 class="mb-4 question-title">{{ answer["question"] }}</h3>
                     
                     <!-- Answer Content - Simple white italic text -->
                     <div class="mt-4">
@@ -37,7 +37,7 @@
                             <i class="bi bi-flag me-1"></i>Report
                         </a>
                         {% elif logged_in and is_own_answer %}
-                        <button class="btn btn-outline-light disabled" disabled style="opacity: 0.5; cursor: not-allowed;">
+                        <button class="btn btn-outline-light btn-disabled" disabled>
                             <i class="bi bi-flag me-1"></i>Report
                         </button>
                         {% endif %}

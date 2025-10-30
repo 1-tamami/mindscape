@@ -541,7 +541,7 @@ class AnswerService:
             if not results:
                 return None, "No data to export."
             
-            filename = f"mindscape_userdata_{dt.datetime.now().strftime('%Y%m%d_%H%M')}.csv"
+            filename = f"memochou_userdata_{dt.datetime.now().strftime('%Y%m%d_%H%M')}.csv"
             
             with open(filename, "w", newline='', encoding='utf-8') as file:
                 fieldnames = ['category', 'depth', 'question', 'answer', 'is_public', 'updated_at']

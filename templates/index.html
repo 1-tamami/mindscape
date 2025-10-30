@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - Home{% endblock %}
-{% block og_title %}Mindscape - Daily Self-Reflection Questions{% endblock %}
+{% block title %}memochou - Home{% endblock %}
+{% block og_title %}memochou - Daily Self-Reflection Questions{% endblock %}
 {% block og_description %}Start your journey of self-discovery with daily reflection questions. Understand yourself better, one answer at a time.{% endblock %}
 
 {% block content %}
@@ -91,14 +91,12 @@
                     <div class="row g-0 p-2">
                         <div class="col-4 category-col">
                             <a class="dropdown-item dropdown-item-small {% if not current_category or current_category == 'all' %}active{% endif %}" 
-                               href="{{ url_for('filtered_category', category='all') }}?tab={{ current_tab or 'my_answers' }}"
-                               style="{% if not current_category or current_category == 'all' %}background-color: #e9ecef;{% endif %}">All</a>
+                               href="{{ url_for('filtered_category', category='all') }}?tab={{ current_tab or 'my_answers' }}">All</a>
                         </div>
                         {% for cat in category %}
                         <div class="col-4 category-col">
                             <a class="dropdown-item dropdown-item-small {% if current_category == cat %}active{% endif %}" 
-                               href="{{ url_for('filtered_category', category=cat) }}?tab={{ current_tab or 'my_answers' }}"
-                               style="{% if current_category == cat %}background-color: #e9ecef;{% endif %}">
+                               href="{{ url_for('filtered_category', category=cat) }}?tab={{ current_tab or 'my_answers' }}">
                                {{ cat.title().replace("_", " ") }}</a>
                         </div>
                         {% endfor %}
@@ -113,13 +111,11 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-custom">
                     <a class="dropdown-item dropdown-item-small {% if not current_depth or current_depth == 'all' %}active{% endif %}" 
-                       href="{{ url_for('filtered_depth', depth='all') }}?tab={{ current_tab or 'my_answers' }}"
-                       style="{% if not current_depth or current_depth == 'all' %}background-color: #e9ecef;{% endif %}">All</a>
+                       href="{{ url_for('filtered_depth', depth='all') }}?tab={{ current_tab or 'my_answers' }}">All</a>
                     {% for depth_item in depth %}
                     {% if depth_item != 'all' %}
                     <a class="dropdown-item dropdown-item-small {% if current_depth == depth_item %}active{% endif %}" 
-                       href="{{ url_for('filtered_depth', depth=depth_item) }}?tab={{ current_tab or 'my_answers' }}"
-                       style="{% if current_depth == depth_item %}background-color: #e9ecef;{% endif %}">
+                       href="{{ url_for('filtered_depth', depth=depth_item) }}?tab={{ current_tab or 'my_answers' }}">
                        {{ depth_item.title() }}</a>
                     {% endif %}
                     {% endfor %}
@@ -133,11 +129,9 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-custom">
                     <a class="dropdown-item dropdown-item-small {% if current_sort == 'latest' %}active{% endif %}" 
-                       href="{{ url_for('sort_posts', sort='latest') }}?tab={{ current_tab or 'my_answers' }}"
-                       style="{% if current_sort == 'latest' %}background-color: #e9ecef;{% endif %}">Latest</a>
+                       href="{{ url_for('sort_posts', sort='latest') }}?tab={{ current_tab or 'my_answers' }}">Latest</a>
                     <a class="dropdown-item dropdown-item-small {% if current_sort == 'oldest' %}active{% endif %}" 
-                       href="{{ url_for('sort_posts', sort='oldest') }}?tab={{ current_tab or 'my_answers' }}"
-                       style="{% if current_sort == 'oldest' %}background-color: #e9ecef;{% endif %}">Oldest</a>
+                       href="{{ url_for('sort_posts', sort='oldest') }}?tab={{ current_tab or 'my_answers' }}">Oldest</a>
                 </div>
             </div>
         </div>
@@ -154,7 +148,7 @@
                     <!-- First Answer -->
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text bg-white position-relative">
                         <h3><a href="{{ url_for('view_answer', answer_id=user_data[i]['padded_id']) }}" class="text-decoration-none text-dark">{{ user_data[i]['question'] }}</a></h3>
-                        <div class="mb-2 d-flex flex-wrap align-items-center gap-2" style="font-size: 1rem;">
+                        <div class="mb-2 d-flex flex-wrap align-items-center gap-2 meta-inline">
                             <span class="text-muted">{{ user_data[i]['updated_at'] }}</span>
                             <span class="badge bg-secondary">{{ user_data[i]['category'].title().replace('_', ' ') }}</span>
                             <span class="badge bg-light text-dark">{{ user_data[i]['depth'].title().replace('_', ' ') }}</span>
@@ -167,7 +161,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"
                                             title="More options">
                                         <img src="{{ url_for('static', filename='assets/img/kebab.svg') }}" 
-                                             alt="more options" style="width: 14px; height: 14px;">
+                                             alt="more options" class="icon-14">
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-compact" aria-labelledby="dropdownMenu{{ user_data[i]['id'] }}">
                                         <li>
@@ -205,14 +199,14 @@
                                 </div>
                             {% endif %}
                         </div>
-                        <p class="mb-0" style="font-style: italic;">{{ user_data[i]['answer'] }}</p>
+                        <p class="mb-0 text-italic">{{ user_data[i]['answer'] }}</p>
                     </div>
                     
                     <!-- Second Answer (if exists) -->
                     {% if i + 1 < user_data|length %}
                         <div class="col-lg-6 order-lg-1 my-auto showcase-text bg-white position-relative">
                             <h3><a href="{{ url_for('view_answer', answer_id=user_data[i + 1]['padded_id']) }}" class="text-decoration-none text-dark">{{ user_data[i + 1]['question'] }}</a></h3>
-                            <div class="mb-2 d-flex flex-wrap align-items-center gap-2" style="font-size: 1rem;">
+                            <div class="mb-2 d-flex flex-wrap align-items-center gap-2 meta-inline">
                                 <span class="text-muted">{{ user_data[i + 1]['updated_at'] }}</span>
                                 <span class="badge bg-secondary">{{ user_data[i + 1]['category'].title().replace('_', ' ') }}</span>
                                 <span class="badge bg-light text-dark">{{ user_data[i + 1]['depth'].title().replace('_', ' ') }}</span>
@@ -224,7 +218,7 @@
                                                 data-bs-toggle="dropdown" aria-expanded="false"
                                                 title="More options">
                                             <img src="{{ url_for('static', filename='assets/img/kebab.svg') }}" 
-                                                 alt="more options" style="width: 14px; height: 14px;">
+                                                 alt="more options" class="icon-14">
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-compact" aria-labelledby="dropdownMenu{{ user_data[i + 1]['id'] }}">
                                             <li>
@@ -260,7 +254,7 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <p class="mb-0" style="font-style: italic;">{{ user_data[i + 1]['answer'] }}</p>
+                            <p class="mb-0 text-italic">{{ user_data[i + 1]['answer'] }}</p>
                         </div>
                     {% endif %}
                 </div>
@@ -321,16 +315,4 @@
 {% endif %}
 {% endif %}
 
-<!-- Question ID for JavaScript -->
-<script>
-    // Set current question ID for refresh functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof FlaskDataHandler !== 'undefined') {
-            FlaskDataHandler.setCurrentQuestionId({{ question['id'] }});
-        } else {
-            // Fallback if scripts haven't loaded yet
-            window.currentQuestionId = {{ question['id'] }};
-        }
-    });
-</script>
 {% endblock %}

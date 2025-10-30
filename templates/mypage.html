@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Mindscape - My Page{% endblock %}
-{% block og_title %}My Page - Mindscape{% endblock %}
+{% block title %}memochou - My Page{% endblock %}
+{% block og_title %}My Page - memochou{% endblock %}
 {% block og_description %}Access your personal dashboard to manage your self-reflection journey and account settings.{% endblock %}
 
 {% block content %}
@@ -81,8 +81,8 @@
                             <h6>Account Information</h6>
                             <p class="text-muted mb-0 small">Member since: {{ current_user.created_at[:10] if current_user.created_at else 'Unknown' }}</p>
                             <p class="text-muted mb-0 small">Email: {{ current_user.email }}</p>
-                            <p class="text-muted mb-0 small" style="color: #adb5bd !important;">
-                                <a href="{{ url_for('delete_account') }}" class="text-decoration-none" style="color: #adb5bd !important;">Delete Account</a>
+                            <p class="text-muted mb-0 small text-subtle">
+                                <a href="{{ url_for('delete_account') }}" class="text-decoration-none text-subtle-link">Delete Account</a>
                             </p>
                         </div>
                         <div class="col-md-6 text-md-end">

@@ -1,5 +1,5 @@
 /*!
-* Mindscape - Self-reflection Blog Service
+* memochou - Self-reflection Blog Service
 * Enhanced JavaScript functionality
 * Copyright 2025 Tamami.K
 */
@@ -384,134 +384,6 @@ const ProfileImageManager = {
 };
 
 // =============================================================================
-// FAQ FUNCTIONALITY
-// =============================================================================
-
-const FAQManager = {
-    toggleFaq(id) {
-        const answer = document.getElementById('answer-' + id);
-        const icon = document.getElementById('icon-' + id);
-        const divider = document.getElementById('divider-' + id);
-        
-        if (answer && icon) {
-            const isExpanded = answer.classList.contains('expanded');
-            
-            if (isExpanded) {
-                // Collapse
-                answer.style.maxHeight = '0';
-                answer.style.paddingTop = '0';
-                answer.style.paddingBottom = '0';
-                answer.classList.remove('expanded');
-                icon.classList.remove('rotated');
-                
-                if (divider) {
-                    divider.style.display = 'none';
-                }
-                
-                // Hide completely after animation
-                setTimeout(() => {
-                    if (!answer.classList.contains('expanded')) {
-                        answer.style.display = 'none';
-                    }
-                }, 300);
-                
-            } else {
-                // Expand
-                answer.style.display = 'block';
-                answer.style.maxHeight = '0';
-                answer.style.paddingTop = '0';
-                answer.style.paddingBottom = '0';
-                
-                // Force reflow to ensure the element is visible
-                answer.offsetHeight;
-                
-                // Start expansion animation
-                requestAnimationFrame(() => {
-                    answer.style.maxHeight = answer.scrollHeight + 40 + 'px'; // Add padding space
-                    answer.style.paddingTop = '1.5rem';
-                    answer.style.paddingBottom = '1.5rem';
-                    answer.classList.add('expanded');
-                    icon.classList.add('rotated');
-                    
-                    if (divider) {
-                        divider.style.display = 'block';
-                    }
-                });
-                
-                // Set final max-height after animation completes
-                setTimeout(() => {
-                    if (answer.classList.contains('expanded')) {
-                        answer.style.maxHeight = 'none';
-                    }
-                }, 300);
-            }
-        }
-    },
-
-    initialize() {
-        console.log('FAQ Manager initializing...');
-        
-        // Initialize all FAQ answers
-        const faqAnswers = document.querySelectorAll('.faq-answer');
-        console.log(`Found ${faqAnswers.length} FAQ answers`);
-        
-        faqAnswers.forEach((answer, index) => {
-            // Set initial state
-            answer.style.display = 'none';
-            answer.style.maxHeight = '0';
-            answer.style.paddingTop = '0';
-            answer.style.paddingBottom = '0';
-            answer.style.overflow = 'hidden';
-            answer.style.transition = 'all 0.3s ease';
-            answer.classList.remove('expanded');
-            
-            console.log(`FAQ answer ${index + 1} initialized`);
-        });
-
-        // Initialize all FAQ dividers
-        const faqDividers = document.querySelectorAll('.faq-divider');
-        faqDividers.forEach((divider, index) => {
-            divider.style.display = 'none';
-            console.log(`FAQ divider ${index + 1} hidden`);
-        });
-
-        // Initialize FAQ questions
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        console.log(`Found ${faqQuestions.length} FAQ questions`);
-        
-        faqQuestions.forEach((question, index) => {
-            // Ensure question is visible
-            question.style.display = 'block';
-            question.style.visibility = 'visible';
-            
-            // Add click handler if not already present
-            if (!question.getAttribute('onclick')) {
-                question.addEventListener('click', () => {
-                    this.toggleFaq(index + 1);
-                });
-            }
-            console.log(`FAQ question ${index + 1} configured`);
-        });
-
-        // Reset all chevron icons
-        const faqChevrons = document.querySelectorAll('.faq-chevron');
-        faqChevrons.forEach((chevron, index) => {
-            chevron.classList.remove('rotated');
-            chevron.style.color = 'white';
-            console.log(`FAQ chevron ${index + 1} reset`);
-        });
-
-        // Force white text color for all FAQ elements
-        const faqElements = document.querySelectorAll('.faq-item h5, .faq-item p, .faq-chevron');
-        faqElements.forEach(element => {
-            element.style.color = 'white';
-        });
-
-        console.log('FAQ Manager initialization complete');
-    }
-};
-
-// =============================================================================
 // FLASK INTEGRATION AND DATA HANDLING
 // =============================================================================
 
@@ -565,12 +437,11 @@ const FlaskDataHandler = {
 
 const App = {
     init() {
-        console.log('Mindscape App initializing...');
+        console.log('memochou App initializing...');
         
         TooltipManager.initialize();
         ProfileDropdown.initialize();
         FormManager.initialize();
-        FAQManager.initialize();
         
         this.initializePageSpecific();
         this.initializeGlobalVariables();
@@ -578,7 +449,7 @@ const App = {
         this.handleTempPasswordWarning();
         Utils.restoreScrollPosition();
         
-        console.log('Mindscape App initialized successfully');
+        console.log('memochou App initialized successfully');
     },
 
     initializePageSpecific() {
@@ -656,7 +527,6 @@ window.refreshQuestion = () => QuestionManager.refresh();
 window.toggleProfileDropdown = () => ProfileDropdown.toggle();
 window.removeProfileImage = () => ProfileImageManager.remove();
 window.saveScrollPosition = () => Utils.saveScrollPosition();
-window.toggleFaq = (id) => FAQManager.toggleFaq(id);
 
 // =============================================================================
 // APPLICATION STARTUP
@@ -667,15 +537,15 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         App.init();
         // Notify init.js that scripts are ready
-        if (window.MindscapeInit && window.MindscapeInit.onScriptsReady) {
-            window.MindscapeInit.onScriptsReady();
+        if (window.memochouInit && window.memochouInit.onScriptsReady) {
+            window.memochouInit.onScriptsReady();
         }
     });
 } else {
     App.init();
     // Notify init.js that scripts are ready
-    if (window.MindscapeInit && window.MindscapeInit.onScriptsReady) {
-        window.MindscapeInit.onScriptsReady();
+    if (window.memochouInit && window.memochouInit.onScriptsReady) {
+        window.memochouInit.onScriptsReady();
     }
 }
 
@@ -698,7 +568,6 @@ if (typeof module !== 'undefined' && module.exports) {
         ProfileDropdown,
         FormManager,
         ProfileImageManager,
-        FAQManager,
         Utils,
         CONFIG,
         FlaskDataHandler

@@ -15,12 +15,12 @@ class EmailService:
         self.from_email = os.getenv("FROM_EMAIL")
         self.bcc_email = os.getenv("BCC_EMAIL")
         self.password = os.getenv("PASSWORD")
-        self.app_url = os.getenv("APP_URL", "https://yourapp.com")
+        self.app_url = os.getenv("APP_URL", "https://memochou.com")
     
     def send_welcome_email(self, user_data):
         """Send welcome email"""
         try:
-            subject = "[Mindscape] Welcome to your self-reflection journey!"
+            subject = "[memochou] Welcome to your self-reflection journey!"
             html_body = self._create_welcome_html(user_data["username"])
             text_body = self._create_welcome_text(user_data["username"])
             
@@ -32,7 +32,7 @@ class EmailService:
     def send_password_reset_email(self, user_data, temp_password):
         """Send password reset email"""
         try:
-            subject = "[Mindscape] Password Reset - Temporary Login Credentials"
+            subject = "[memochou] Password Reset - Temporary Login Credentials"
             html_body = self._create_password_reset_html(user_data["username"], temp_password)
             text_body = self._create_password_reset_text(user_data["username"], temp_password)
             
@@ -44,7 +44,7 @@ class EmailService:
     def send_inquiry_email(self, inquiry_data):
         """Send inquiry confirmation email"""
         try:
-            subject = "[Mindscape] Message received - We'll get back to you soon!"
+            subject = "[memochou] Message received - We'll get back to you soon!"
             html_body = self._create_inquiry_html(inquiry_data)
             text_body = self._create_inquiry_text(inquiry_data)
             
@@ -57,7 +57,7 @@ class EmailService:
         """Send report notification email to admins and reporter"""
         try:
             # Send to admin
-            admin_subject = "[Mindscape] New Report Submitted"
+            admin_subject = "[memochou] New Report Submitted"
             admin_html_body = self._create_admin_report_html(report_data)
             admin_text_body = self._create_admin_report_text(report_data)
             
@@ -66,7 +66,7 @@ class EmailService:
                 self._send_html_email(self.bcc_email, admin_subject, admin_html_body, admin_text_body)
             
             # Send confirmation to reporter
-            reporter_subject = "[Mindscape] Report Submitted Successfully"
+            reporter_subject = "[memochou] Report Submitted Successfully"
             reporter_html_body = self._create_reporter_confirmation_html(report_data)
             reporter_text_body = self._create_reporter_confirmation_text(report_data)
             
@@ -82,7 +82,7 @@ class EmailService:
         <html>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h1 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">Welcome to Mindscape!</h1>
+                    <h1 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">Welcome to memochou!</h1>
                     <p>Hi {username},</p>
                     <p>Thank you for joining our community of self-reflection! Your account has been successfully created.</p>
                     <div style="background-color: #f8f9fa; padding: 20px; border-left: 4px solid #000; margin: 20px 0;">
@@ -99,7 +99,7 @@ class EmailService:
                     <p>If you have any questions, don't hesitate to contact us through our platform.</p>
                     <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
                     <p style="color: #666; font-size: 0.9em;">
-                        This email was sent because you created an account at Mindscape.<br>
+                        This email was sent because you created an account at memochou.<br>
                         If you didn't create this account, please contact us immediately.
                     </p>
                 </div>
@@ -123,7 +123,7 @@ What's next?
 Ready to begin your journey? Visit: {self.app_url}
 
 ---
-Mindscape Team
+memochou Team
 """
     
     def _create_password_reset_html(self, username, temp_password):
@@ -134,7 +134,7 @@ Mindscape Team
                 <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
                     <h1 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">Password Reset Request</h1>
                     <p>Hi {username},</p>
-                    <p>We received a request to reset your password for your Mindscape account.</p>
+                    <p>We received a request to reset your password for your memochou account.</p>
                     <div style="background-color: #fff3cd; padding: 20px; border-left: 4px solid #ffc107; margin: 20px 0;">
                         <h3 style="margin-top: 0; color: #856404;">Temporary Password</h3>
                         <p style="margin-bottom: 0; font-family: monospace; font-size: 1.2em; background-color: #fff; padding: 10px; border: 1px solid #ddd;">
@@ -160,7 +160,7 @@ Mindscape Team
         """Create password reset email text"""
         return f"""Hi {username},
 
-We received a request to reset your password for your Mindscape account.
+We received a request to reset your password for your memochou account.
 
 TEMPORARY PASSWORD: {temp_password}
 
@@ -173,7 +173,7 @@ Important Security Information:
 Login here: {self.app_url}/login
 
 ---
-Mindscape Team
+memochou Team
 """
     
     def _create_inquiry_html(self, inquiry_data):
@@ -214,7 +214,7 @@ Message: {inquiry_data["message"]}
 We typically respond within 24-48 hours during business days. Thank you for your patience!
 
 ---
-Mindscape Team
+memochou Team
 """
     
     def _create_admin_report_html(self, report_data):
@@ -263,7 +263,7 @@ By: {report_data["reported_username"]}
 Please review this report and take appropriate action if necessary.
 
 ---
-Mindscape Admin System
+memochou Admin System
 """
 
     def _create_reporter_confirmation_html(self, report_data):
@@ -281,11 +281,11 @@ Mindscape Admin System
                             <li>Our moderation team will carefully review the reported content</li>
                             <li>We'll take appropriate action if the content violates our community guidelines</li>
                             <li>We typically complete reviews within 24-48 hours</li>
-                            <li>Your report helps make Mindscape a better place for everyone</li>
+                            <li>Your report helps make memochou a better place for everyone</li>
                         </ul>
                     </div>
-                    <p>Thanks again for your valuable contribution. We hope you continue to enjoy organizing your thoughts and growing through self-reflection on Mindscape!</p>
-                    <p>Best regards,<br>The Mindscape Team</p>
+                    <p>Thanks again for your valuable contribution. We hope you continue to enjoy organizing your thoughts and growing through self-reflection on memochou!</p>
+                    <p>Best regards,<br>The memochou Team</p>
                 </div>
             </body>
         </html>
@@ -301,12 +301,12 @@ What happens next?
 - Our moderation team will carefully review the reported content
 - We'll take appropriate action if the content violates our community guidelines
 - We typically complete reviews within 24-48 hours
-- Your report helps make Mindscape a better place for everyone
+- Your report helps make memochou a better place for everyone
 
-Thanks again for your valuable contribution. We hope you continue to enjoy organizing your thoughts and growing through self-reflection on Mindscape!
+Thanks again for your valuable contribution. We hope you continue to enjoy organizing your thoughts and growing through self-reflection on memochou!
 
 Best regards,
-The Mindscape Team
+The memochou Team
 """
 
     def _send_html_email(self, to_email, subject, html_body, text_body):

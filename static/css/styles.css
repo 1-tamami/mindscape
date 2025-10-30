@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-* Mindscape - Self-Reflection Blog Service
+* memochou - Self-Reflection Blog Service
 * Custom Monochrome Design System
 * Copyright 2025 Tamami.K
 */
@@ -535,6 +535,124 @@ a:hover {
 
 .navbar-brand img {
   margin-right: 0.5rem;
+}
+
+.brand-name {
+  text-transform: none !important;
+  font-variant: normal;
+  font-weight: inherit;
+}
+
+.simple-page {
+  background-color: #fff;
+  color: #000;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.simple-page a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.simple-page__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.simple-page__meta {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.simple-page__content {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.simple-page--about .simple-page__content {
+  font-size: 0.8rem;
+}
+
+.simple-page__section + .simple-page__section {
+  margin-top: 2.5rem;
+}
+
+.simple-page__subheading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.simple-page__faq {
+  margin: 0;
+  padding: 0;
+}
+
+.simple-page__faq dt {
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.simple-page__faq dt:first-of-type {
+  margin-top: 0;
+}
+
+.simple-page__faq dd {
+  margin-left: 0;
+  margin-top: 0.6rem;
+}
+
+.text-subtle {
+  color: #adb5bd !important;
+}
+
+.text-subtle-link {
+  color: #adb5bd !important;
+}
+
+.text-subtle-link:hover {
+  color: #adb5bd !important;
+}
+
+.form-textarea--large {
+  min-height: 200px;
+}
+
+.question-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.meta-inline {
+  font-size: 1rem;
+}
+
+.icon-14 {
+  width: 14px;
+  height: 14px;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.icon-flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.dropdown-menu-custom .dropdown-item.active,
+.dropdown-menu-custom .dropdown-item.active:hover {
+  background-color: #e9ecef;
+  color: #000;
 }
 
 /* =============================================================================
@@ -1240,121 +1358,6 @@ footer .text-dark {
 
 .btn-outline-secondary.text-dark:hover {
   color: #fff !important;
-}
-
-/* =============================================================================
-   FAQ COMPONENTS
-   ============================================================================= */
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-/* FAQ Card Container */
-.faq-card {
-  transition: all var(--transition-base);
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-}
-
-.faq-card:hover {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* FAQ Question Styling */
-.faq-question {
-  transition: background-color var(--transition-base);
-  background: none !important;
-  border: none !important;
-  margin: 0;
-  border-radius: 0 !important;
-  padding: 1rem 1.5rem !important;
-}
-
-.faq-question:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.faq-question h5 {
-  font-weight: 500;
-  line-height: 1.3;
-  color: white !important;
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-/* FAQ Chevron Animation */
-.faq-chevron {
-  transition: transform 0.3s ease;
-  font-size: 1.2rem;
-  color: white !important;
-}
-
-.faq-item .faq-chevron.rotated {
-  transform: rotate(180deg);
-}
-
-/* FAQ Divider */
-.faq-divider {
-  transition: opacity var(--transition-base);
-}
-
-.faq-divider hr {
-  margin: 0;
-  border-color: rgba(255, 255, 255, 0.3);
-  opacity: 0.5;
-}
-
-/* FAQ Answer with Smooth Animation */
-.faq-answer {
-  background: none !important;
-  border: none !important;
-  margin: 0;
-  border-radius: 0 !important;
-  transition: all 0.3s ease;
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.faq-answer.expanded {
-  max-height: 500px;
-  padding: 1rem 1.5rem !important;
-}
-
-.faq-answer p {
-  margin-bottom: 0;
-  line-height: 1.6;
-  color: white !important;
-}
-
-/* Ensure FAQ items maintain consistent spacing */
-.faq-item {
-  margin-bottom: 1.5rem;
-}
-
-.faq-container {
-  max-width: 100%;
-}
-
-/* Link styling within FAQ */
-.faq-answer a.link-light {
-  color: #e9ecef !important;
-  text-decoration: underline;
-}
-
-.faq-answer a.link-light:hover {
-  color: white !important;
-}
-
-/* Prevent layout shifts during animation */
-.faq-card * {
-  box-sizing: border-box;
 }
 
 /* =============================================================================
