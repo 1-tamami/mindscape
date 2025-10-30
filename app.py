@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap import Bootstrap
 from config import Config
 from database import init_db
 from routes import register_routes
@@ -13,7 +13,7 @@ def create_app():
     app.config.from_object(Config)
     
     # Initialize extensions
-    Bootstrap5(app)
+    Bootstrap(app)
     init_db(app)
     
     # Register routes
